@@ -8,5 +8,5 @@ ClassicMap::ClassicMap(){
 }
 
 ClassicMap::~ClassicMap(){
-  
+
 }
