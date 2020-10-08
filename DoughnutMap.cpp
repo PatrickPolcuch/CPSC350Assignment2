@@ -3,10 +3,10 @@
 #include "GameOfLife.h"
 
 
-DoughnutMap::DoughnutMap(){
-
+DoughnutMap::DoughnutMap(int r,int c):Map(r,c){
+  
 }
 
 DoughnutMap::~DoughnutMap(){
-  
+
 }

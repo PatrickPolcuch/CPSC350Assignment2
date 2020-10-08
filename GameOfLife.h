@@ -1,5 +1,7 @@
 //my .h file
 #include <iostream>
+#include <fstream>
+#include <sstream>
 #include <math.h>
 
 using namespace std;
@@ -13,24 +15,36 @@ public:
 
 class Map{
 public:
-  Map();
+  Map(int r,int c);
   ~Map();
   void ReadFile();
-  void RandomMap(int r,int c);
-  void MapFromString();
+  void RandomMap();
+  void MapFromString(string str);
+  string MapToString();
+  int NumNeighbors(int r,int c);
+
+  int grid[100][100];
+  int rows;
+  int cols;
 };
 
 class ClassicMap: public Map{
 public:
-  //functions
+  ClassicMap(int r,int c);
+  ~ClassicMap();
+  int NumNeighbors(int r,int c);
 };
 
 class MirrorMap:public Map{
 public:
-  //functions
+  MirrorMap(int r,int c);
+  ~MirrorMap();
+
+
 };
 
 class DoughnutMap:public Map{
 public:
-  //functions
+  DoughnutMap(int r,int c);
+  ~DoughnutMap();
 };
