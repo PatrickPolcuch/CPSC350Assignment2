@@ -26,6 +26,8 @@ public:
   int grid[100][100];
   int rows;
   int cols;
+//private:
+//  int subNumNeighbors(int r,int c);
 };
 
 class ClassicMap: public Map{
@@ -33,6 +35,7 @@ public:
   ClassicMap(int r,int c);
   ~ClassicMap();
   int NumNeighbors(int r,int c);
+  //int Method(int r,int c);
 };
 
 class MirrorMap:public Map{

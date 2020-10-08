@@ -11,7 +11,6 @@ runGame::~runGame(){
 }
 
 void runGame::run(){
-  Map* myMap;
 
   cout<<"What type of map would you like, Doughnut, Mirror, or Classic? (enter as 'D', 'M', or 'C')"<<endl;
   string usermap ="";
@@ -54,21 +53,25 @@ void runGame::run(){
     cin>>cols;
   }
 
-    if(usermap.compare("D")==0||usermap.compare("d")==0){
-      myMap = new DoughnutMap(rows, cols);
-    }else if(usermap.compare("M")==0||usermap.compare("m")==0){
-      myMap = new MirrorMap(rows, cols);
-    }else if(usermap.compare("C")==0||usermap.compare("c")==0){
-      myMap = new ClassicMap(rows, cols);
-    } else{
-      cout<<"Incorrect input for map type"<<endl;
-    }
+  //Map* myMap;
+  if(usermap.compare("D")==0||usermap.compare("d")==0){
+    DoughnutMap* myMap;
+    myMap = new DoughnutMap(rows, cols);
+  }else if(usermap.compare("M")==0||usermap.compare("m")==0){
+    MirrorMap* myMap;
+    myMap = new MirrorMap(rows, cols);
+  }else if(usermap.compare("C")==0||usermap.compare("c")==0){
+    ClassicMap* myMap;
+    myMap = new ClassicMap(rows, cols);
+  } else{
+    cout<<"Incorrect input for map type"<<endl;
+  }
 
-    if(text.compare("empty")==0){
-      myMap->RandomMap();
-    }else{
-      myMap->MapFromString(text);
-    }
+  if(text.compare("empty")==0){
+    myMap->RandomMap();
+  }else{
+    myMap->MapFromString(text);
+  }
 
   int a = myMap->NumNeighbors(0,0);
   cout<<a<<endl;

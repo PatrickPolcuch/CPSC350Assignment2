@@ -5,6 +5,7 @@
 Map::Map(int r,int c){//makes the map
   rows = r;
   cols = c;
+  maptype = 
 
   /*char** grid = new char*[rows];
   for(int i = 0; i < rows; ++i){
@@ -91,4 +92,11 @@ string Map::MapToString(){
   return ret;
 }
 
-int Map::NumNeighbors(int r,int c){}//subclasses must define
+int Map::NumNeighbors(int r,int c){
+  cout<<"executing Map::Numneighbors"<<endl;
+  //subNumNeighbors(r, c);
+}
+
+/*int Map::subNumNeighbors(int r, int c){
+  cout<<"executing Math::subNumNeighbors"<<endl;
+}*/

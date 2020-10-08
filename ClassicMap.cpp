@@ -11,7 +11,14 @@ ClassicMap::~ClassicMap(){
 
 }
 
+/*int ClassicMap::Method(int r,int c){
+  NumNeighbors(r,c);
+  return subNumNeighbors(r,c);
+
+}*/
+
 int ClassicMap::NumNeighbors(int r,int c){
+  cout<<"executing ClassicMap::subNumNeighbors"<<endl;
   int numN = 0;
   for(int i = r-1; i <= r+1; ++i){
     for(int j = c-1; i <= c+1; ++j){
