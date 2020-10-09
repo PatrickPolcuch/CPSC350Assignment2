@@ -13,8 +13,8 @@ runGame::~runGame(){
 void runGame::run(){
 
   cout<<"What type of map would you like, Doughnut, Mirror, or Classic? (enter as 'D', 'M', or 'C')"<<endl;
-  string usermap ="";
-  cin>>usermap;
+  string usermapStr ="";
+  cin>>usermapStr;
 
   cout<<"Would you like to like to start from a file, or generate a random map? (file/rand)"<<endl;
   string userfile = "";
@@ -53,19 +53,18 @@ void runGame::run(){
     cin>>cols;
   }
 
-  //Map* myMap;
-  if(usermap.compare("D")==0||usermap.compare("d")==0){
-    DoughnutMap* myMap;
-    myMap = new DoughnutMap(rows, cols);
-  }else if(usermap.compare("M")==0||usermap.compare("m")==0){
-    MirrorMap* myMap;
-    myMap = new MirrorMap(rows, cols);
-  }else if(usermap.compare("C")==0||usermap.compare("c")==0){
-    ClassicMap* myMap;
-    myMap = new ClassicMap(rows, cols);
+  char usermapChar = 'C';
+  if(usermapStr.compare("D")==0||usermapStr.compare("d")==0){
+    usermapChar = 'D';
+  }else if(usermapStr.compare("M")==0||usermapStr.compare("m")==0){
+    usermapChar = 'M';
+  }else if(usermapStr.compare("C")==0||usermapStr.compare("c")==0){
+    usermapChar = 'C';
   } else{
-    cout<<"Incorrect input for map type"<<endl;
+    cout<<"Incorrect input for map type, defaulting to Classic map"<<endl;
   }
+
+  Map* myMap = new Map(rows, cols, usermapChar);
 
   if(text.compare("empty")==0){
     myMap->RandomMap();
@@ -73,7 +72,35 @@ void runGame::run(){
     myMap->MapFromString(text);
   }
 
-  int a = myMap->NumNeighbors(0,0);
-  cout<<a<<endl;
+  char delivery;
+  cout<<"Would you like to hit enter before each generation, have a brief pause between generations, of output all generations to a file? ('E','P','F')"<<endl;
+  cin>>delivery;
+
+  string fileContents = "";
+
+  int generation = 0;
+  string gen0 = "gen0";
+  string gen1 = "gen1";
+  string gen2 = "gen2";
+
+  cout<<"Generation "<<generation<<'\n'<<myMap->MapToString()<<endl;
+  while(true){
+    string next = myMap->NextGen();
+    generation++;
+
+    if(generation%3==0){
+      gen0=next;
+    }else if(generation%3==1){
+      gen1 =next;
+    }else if(generation%3==2){
+      gen2 = next;
+    }
+    if(gen0.compare(gen1)==0||gen0.compare(gen2) == 0||gen1.compare(gen2) == 0){
+      cout<<"Stabelized"<<endl;
+      break;
+    }
+    cout<<"Generation "<<generation<<'\n'<<next<<endl;
+  }
+
   delete myMap;
 }

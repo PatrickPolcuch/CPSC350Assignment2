@@ -15,39 +15,21 @@ public:
 
 class Map{
 public:
-  Map(int r,int c);
+  Map(int r,int c, char type);
   ~Map();
   void ReadFile();
   void RandomMap();
   void MapFromString(string str);
   string MapToString();
   int NumNeighbors(int r,int c);
+  int NumNeighborsClassic(int r,int c);
+  int NumNeighborsDoughnut(int r,int c);
+  int NumNeighborsMirror(int r,int c);
+  string NextGen();
 
   int grid[100][100];
   int rows;
   int cols;
-//private:
-//  int subNumNeighbors(int r,int c);
-};
+  char maptype;
 
-class ClassicMap: public Map{
-public:
-  ClassicMap(int r,int c);
-  ~ClassicMap();
-  int NumNeighbors(int r,int c);
-  //int Method(int r,int c);
-};
-
-class MirrorMap:public Map{
-public:
-  MirrorMap(int r,int c);
-  ~MirrorMap();
-
-
-};
-
-class DoughnutMap:public Map{
-public:
-  DoughnutMap(int r,int c);
-  ~DoughnutMap();
 };
