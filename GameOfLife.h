@@ -1,16 +1,25 @@
-//my .h file
+/*Patrick Polcuch
+2348668
+CPSC350Assignment2
+my .h file
+*/
+
 #include <iostream>
 #include <fstream>
-#include <sstream>
-#include <math.h>
+#include <sstream>//used to get integers from a file
+#include <chrono>//for the sleep_for() function
+#include <thread>//for the sleep_for() function
 
 using namespace std;
+using namespace std::this_thread;//for the sleep_for() function
+using namespace std::chrono;//for the sleep_for() function
 
 class runGame{
 public:
   runGame();
   ~runGame();
   static void run();
+  static void pause(char type);
 };
 
 class Map{

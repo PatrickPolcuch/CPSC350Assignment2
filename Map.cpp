@@ -1,4 +1,9 @@
-//map.cpp
+/*Patrick Polcuch
+2348668
+CPSC350Assignment2
+map.cpp
+To map objects for the game of life
+*/
 
 #include "GameOfLife.h"
 
@@ -40,35 +45,35 @@ void Map::MapFromString(string str){//make a map from a user inputed file
   }
 }
 
-void Map::RandomMap(){
+void Map::RandomMap(){//makes a random map
   cout<<"What initial population density would you like? (0,1]"<<endl;
   float popDensity = 0;
   cin>>popDensity;
-  int numCells = (int)(popDensity*rows*cols);
+
+  int numCells = (int)(popDensity*rows*cols);//calculates how many cells there should be bassed off of the population density
   if(numCells == 0){
     numCells = 1;
   }
 
-  for(int i =0; i<rows; ++i){
+  for(int i =0; i<rows; ++i){//Initializes the map as blank
     for(int j = 0; j<cols; ++j){
       grid[i][j] = '-';
     }
   }
 
   srand (time(NULL));//generates a random seed for rand()
-  while(numCells != 0){
+  while(numCells != 0){//randomly picks a spot on the map and assigns it a cell if it doesnt have one
       int row = rand() % rows;
       int col = rand() % cols;
-      if(grid[rows][cols] != 'X'){
+      if(grid[row][col] != 'X'){
         grid[row][col]='X';
         numCells--;
       }
   }
-
   cout<<MapToString()<<endl;
 }
 
-string Map::MapToString(){
+string Map::MapToString(){//makes a string representation of the current map
   string ret = "";//return string
   for(int i =0; i<rows; ++i){
     for(int j = 0; j<cols; j++){
@@ -79,8 +84,8 @@ string Map::MapToString(){
   return ret;
 }
 
-int Map::NumNeighbors(int r,int c){
-  switch(maptype){
+int Map::NumNeighbors(int r,int c){//calculates how many neighbors the given spot has
+  switch(maptype){//calls the respective method for each type of map
     case 'C':
       return NumNeighborsClassic(r,c);
       break;
@@ -96,7 +101,7 @@ int Map::NumNeighbors(int r,int c){
   return -1;
 }
 
-int Map::NumNeighborsClassic(int r,int c){
+int Map::NumNeighborsClassic(int r,int c){//returns the amount of neigbors for a point on a Classic map
   int numN = 0;
   for(int i = r-1; i <= r+1; ++i){
     for(int j = c-1; j <= c+1; ++j){
@@ -111,7 +116,7 @@ int Map::NumNeighborsClassic(int r,int c){
   return numN;
 }
 
-int Map::NumNeighborsDoughnut(int r,int c){
+int Map::NumNeighborsDoughnut(int r,int c){//returns the amount of neigbors for a point on a Doughnut map
   int numN = 0;
   for(int i = r-1; i <= r+1; ++i){
     for(int j = c-1; j <= c+1; ++j){
@@ -126,7 +131,7 @@ int Map::NumNeighborsDoughnut(int r,int c){
   return numN;
 }
 
-int Map::NumNeighborsMirror(int r,int c){
+int Map::NumNeighborsMirror(int r,int c){//returns the amount of neigbors for a point on a Mirror map
   int numN = 0;
   for(int i = r-1; i <= r+1; ++i){
     for(int j = c-1; j <= c+1; ++j){
@@ -147,9 +152,6 @@ int Map::NumNeighborsMirror(int r,int c){
       if(j>=cols){
         jforNow = j-1;
       }
-      cout<<i<<","<<j<<endl;
-      cout<<iforNow<<","<<jforNow<<endl;
-      cout<<endl;
       if(grid[iforNow][jforNow] == 'X'){
         numN++;
       }
@@ -158,7 +160,7 @@ int Map::NumNeighborsMirror(int r,int c){
   return numN;
 }
 
-string Map::NextGen(){
+string Map::NextGen(){//returns a string representsation of the next generation and updates the map to the next genteration
   string ret = "";//return string
   for(int i =0; i<rows; ++i){
     for(int j = 0; j<cols; j++){
@@ -177,6 +179,6 @@ string Map::NextGen(){
     }
     ret += '\n';
   }
-  MapFromString(ret);
+  MapFromString(ret);//updates grid
   return ret;
 }
